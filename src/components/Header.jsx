@@ -1,4 +1,5 @@
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -26,7 +27,9 @@ export default function Header() {
           <li className="hidden sm:inline text-slate-900 hover:underline">
             About
           </li>
-          <li className="text-slate-900 hover:underline">Sign in</li>
+          <Link to="/sign-in" className="text-slate-900 hover:underline">
+            Sign in
+          </Link>
         </ul>
       </div>
     </header>
