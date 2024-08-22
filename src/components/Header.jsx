@@ -5,10 +5,12 @@ export default function Header() {
   return (
     <header className="">
       <div className="flex justify-between items-center max-w-6xl max-auto p-3">
-        <h1 className="font-bold text-lg sm:text-xl flex flex-wrap gap-2">
-          <span className="text-slate-900">Recipe</span>
-          <span className="text-slate-900">Application</span>
-        </h1>
+        <Link to="/">
+          <h1 className="font-bold text-lg sm:text-xl flex flex-wrap gap-2">
+            <span className="text-slate-900">Recipe</span>
+            <span className="text-slate-900">Application</span>
+          </h1>
+        </Link>
 
         <form className="">
           <input
@@ -21,12 +23,16 @@ export default function Header() {
           </button>
         </form>
         <ul className="flex gap-3">
-          <li className="hidden sm:inline text-slate-900 hover:underline">
-            Home
-          </li>
-          <li className="hidden sm:inline text-slate-900 hover:underline">
-            About
-          </li>
+          <Link to="/">
+            <li className="hidden sm:inline text-slate-900 hover:underline">
+              Home
+            </li>
+          </Link>
+          <Link to={"/about"}>
+            <li className="hidden sm:inline text-slate-900 hover:underline">
+              About
+            </li>
+          </Link>
           <Link to="/sign-in" className="text-slate-900 hover:underline">
             Sign in
           </Link>
