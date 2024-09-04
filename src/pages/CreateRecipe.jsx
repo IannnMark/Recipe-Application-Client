@@ -13,7 +13,7 @@ export default function CreateRecipe() {
   const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [formData, setFormData] = useState({
-    imagesUrls: [],
+    imageUrls: [],
     title: "",
     ingredients: "",
     preparationSteps: "",
@@ -30,7 +30,7 @@ export default function CreateRecipe() {
   const handleImageSubmit = (e) => {
     e.preventDefault();
 
-    if (files.length > 0 && files.length + formData.imagesUrls.length < 7) {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
@@ -42,7 +42,7 @@ export default function CreateRecipe() {
         .then((urls) => {
           setFormData({
             ...formData,
-            imagesUrls: formData.imagesUrls.concat(urls),
+            imageUrls: formData.imageUrls.concat(urls),
           });
           setImageUploadError(false);
           setUploading(false);
@@ -85,7 +85,7 @@ export default function CreateRecipe() {
   const handleRemoveImage = (index) => {
     setFormData({
       ...formData,
-      imagesUrls: formData.imagesUrls.filter((_, i) => i !== index),
+      imageUrls: formData.imageUrls.filter((_, i) => i !== index),
     });
   };
 
@@ -99,7 +99,7 @@ export default function CreateRecipe() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      if (formData.imagesUrls.length < 1)
+      if (formData.imageUrls.length < 1)
         return setError("You must upload at least one image");
       setLoading(true);
       setError(false);
@@ -137,6 +137,8 @@ export default function CreateRecipe() {
              rounded-lg"
             id="title"
             required
+            onChange={handleChange}
+            value={formData.title}
           />
           <input
             type="text"
@@ -197,8 +199,8 @@ export default function CreateRecipe() {
           <p className="text-red-800 text-sm">
             {imageUploadError && imageUploadError}
           </p>
-          {formData.imagesUrls.length > 0 &&
-            formData.imagesUrls.map((url, index) => (
+          {formData.imageUrls.length > 0 &&
+            formData.imageUrls.map((url, index) => (
               <div
                 key={url}
                 className="flex justify-between p-3 border items-center"
