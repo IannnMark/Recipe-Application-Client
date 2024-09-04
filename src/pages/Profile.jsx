@@ -166,6 +166,7 @@ export default function Profile() {
         <Link
           className="bg-green-900 text-white p-3
         rounded-lg uppercase text-center hover:opacity-95"
+          to={"/create-recipe"}
         >
           Create Recipe
         </Link>
