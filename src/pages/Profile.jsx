@@ -28,6 +28,7 @@ export default function Profile() {
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [showRecipeError, setShowRecipeError] = useState(false);
   const [userRecipe, setUserRecipe] = useState([]);
+  const [showRecipe, setShowRecipe] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -106,6 +107,7 @@ export default function Profile() {
   const handleShowRecipe = async () => {
     try {
       setShowRecipeError(false);
+      setShowRecipe((preShowRecipe) => !preShowRecipe);
       const res = await fetch(`/api/user/recipe/${currentUser._id}`);
       const data = await res.json();
       if (data.success === false) {
@@ -200,41 +202,46 @@ export default function Profile() {
         {updateSuccess ? "User updated sucessfully" : ""}
       </p>
       <button onClick={handleShowRecipe} className="text-green-900 w-full">
-        Show Recipe
+        {showRecipe ? "Hide Recipe" : "Show Recipe"}
       </button>
+
       <p className="text-red-800 mt-5">
         {showRecipeError ? "Error showing recipe" : ""}
       </p>
-      {userRecipe && userRecipe.length > 0 && (
-        <div className="flex flex-col gap-4">
-          <h1 className="text-center mt-7 text-2xl font-semibold">
-            Your Recipe
-          </h1>
-          {userRecipe.map((recipe) => (
-            <div
-              key={recipe._id}
-              className="border border-gray-300 rounded-lg p-3 flex justify-between items-center gap-4"
-            >
-              <Link to={`/recipe/${recipe._id}`}>
-                <img
-                  src={recipe.imageUrls[0]}
-                  alt="recipe image"
-                  className="h-16 w-16 object-contain"
-                />
-              </Link>
-              <Link
-                className="text-slate-900 font-semibold hover:underline truncate flex-1"
-                to={`recipe/${recipe._id}`}
-              >
-                <p>{recipe.title}</p>
-              </Link>
-              <div className="flex flex-col items-center">
-                <button>Delete</button>
-                <button>Edit</button>
-              </div>
+      {showRecipe && (
+        <>
+          {userRecipe && userRecipe.length > 0 && (
+            <div className="flex flex-col gap-4">
+              <h1 className="text-center mt-7 text-2xl font-semibold">
+                Your Recipe
+              </h1>
+              {userRecipe.map((recipe) => (
+                <div
+                  key={recipe._id}
+                  className="border border-gray-300 rounded-lg p-3 flex justify-between items-center gap-4"
+                >
+                  <Link to={`/recipe/${recipe._id}`}>
+                    <img
+                      src={recipe.imageUrls[0]}
+                      alt="recipe image"
+                      className="h-16 w-16 object-contain"
+                    />
+                  </Link>
+                  <Link
+                    className="text-slate-900 font-semibold hover:underline truncate flex-1"
+                    to={`recipe/${recipe._id}`}
+                  >
+                    <p>{recipe.title}</p>
+                  </Link>
+                  <div className="flex flex-col items-center">
+                    <button>Delete</button>
+                    <button>Edit</button>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+        </>
       )}
     </div>
   );
