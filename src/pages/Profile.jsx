@@ -26,6 +26,8 @@ export default function Profile() {
   const [fileUploadError, setFileUploadError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showRecipeError, setShowRecipeError] = useState(false);
+  const [userRecipe, setUserRecipe] = useState([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -98,6 +100,22 @@ export default function Profile() {
       dispatch(deleteUserSuccess(data));
     } catch (error) {
       dispatch(deleteUserFailure(error.message));
+    }
+  };
+
+  const handleShowRecipe = async () => {
+    try {
+      setShowRecipeError(false);
+      const res = await fetch(`/api/user/recipe/${currentUser._id}`);
+      const data = await res.json();
+      if (data.success === false) {
+        setShowRecipeError(true);
+        return;
+      }
+      setUserRecipe(data);
+    } catch (error) {
+      console.log(error);
+      setShowRecipeError(true);
     }
   };
 
@@ -181,6 +199,43 @@ export default function Profile() {
       <p className="text-green-900 mt-5">
         {updateSuccess ? "User updated sucessfully" : ""}
       </p>
+      <button onClick={handleShowRecipe} className="text-green-900 w-full">
+        Show Recipe
+      </button>
+      <p className="text-red-800 mt-5">
+        {showRecipeError ? "Error showing recipe" : ""}
+      </p>
+      {userRecipe && userRecipe.length > 0 && (
+        <div className="flex flex-col gap-4">
+          <h1 className="text-center mt-7 text-2xl font-semibold">
+            Your Recipe
+          </h1>
+          {userRecipe.map((recipe) => (
+            <div
+              key={recipe._id}
+              className="border border-gray-300 rounded-lg p-3 flex justify-between items-center gap-4"
+            >
+              <Link to={`/recipe/${recipe._id}`}>
+                <img
+                  src={recipe.imageUrls[0]}
+                  alt="recipe image"
+                  className="h-16 w-16 object-contain"
+                />
+              </Link>
+              <Link
+                className="text-slate-900 font-semibold hover:underline truncate flex-1"
+                to={`recipe/${recipe._id}`}
+              >
+                <p>{recipe.title}</p>
+              </Link>
+              <div className="flex flex-col items-center">
+                <button>Delete</button>
+                <button>Edit</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
