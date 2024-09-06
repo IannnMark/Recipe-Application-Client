@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       <div className="flex flex-col gap-6 p-28 max-w-6xl mx-auto">
         <h1 className="text-slate-900 font-bold text-4xl lg:text-7xl">
-          Find the recipe <span className="text-slate-500">that is </span>
+          Discover the recipe <span className="text-slate-500">that is </span>
           <br />
           perfect for you
         </h1>
