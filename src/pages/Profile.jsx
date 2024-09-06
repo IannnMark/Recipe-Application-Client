@@ -229,7 +229,7 @@ export default function Profile() {
                   </Link>
                   <Link
                     className="text-slate-900 font-semibold hover:underline truncate flex-1"
-                    to={`recipe/${recipe._id}`}
+                    to={`/recipe/${recipe._id}`}
                   >
                     <p>{recipe.title}</p>
                   </Link>
