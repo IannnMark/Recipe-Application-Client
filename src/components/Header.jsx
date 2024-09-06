@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <header className="bg-yellow-300 shadow-lg">
+    <header className="bg-gray-400 shadow-lg">
       <div className="flex justify-between items-center max-w-6xl max-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-lg sm:text-xl flex flex-wrap gap-2">
