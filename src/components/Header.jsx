@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   return (
-    <header className="">
+    <header className="bg-yellow-300 shadow-lg">
       <div className="flex justify-between items-center max-w-6xl max-auto p-3">
         <Link to="/">
           <h1 className="font-bold text-lg sm:text-xl flex flex-wrap gap-2">
@@ -14,11 +14,11 @@ export default function Header() {
           </h1>
         </Link>
 
-        <form className="">
+        <form className="bg-slate-100 p-3 rounded-lg flex items-center">
           <input
             type="text"
             placeholder="Search...."
-            className="bg-transparent focus:outline-none w-24 sm:w-64"
+            className="bg-transparent focus:outline-none w-24 sm:w-64 font-medium"
           />
           <button>
             <FaSearch className="text-slate-900" />
@@ -26,12 +26,12 @@ export default function Header() {
         </form>
         <ul className="flex gap-3">
           <Link to="/">
-            <li className="hidden sm:inline text-slate-900 hover:underline">
+            <li className="hidden sm:inline text-slate-900 hover:underline font-semibold">
               Home
             </li>
           </Link>
           <Link to={"/about"}>
-            <li className="hidden sm:inline text-slate-900 hover:underline">
+            <li className="hidden sm:inline text-slate-900 hover:underline font-semibold">
               About
             </li>
           </Link>
