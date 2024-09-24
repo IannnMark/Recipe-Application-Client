@@ -199,7 +199,7 @@ export default function Profile() {
       </div>
       <p className="text-red-900 mt-5">{error ? error : ""}</p>
       <p className="text-green-900 mt-5">
-        {updateSuccess ? "User updated sucessfully" : ""}
+        {updateSuccess ? "User updated successfully" : ""}
       </p>
       <button onClick={handleShowRecipe} className="text-green-900 w-full">
         {showRecipe ? "Hide Recipe" : "Show Recipe"}
